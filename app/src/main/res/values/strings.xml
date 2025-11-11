@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Sentinel Core</string>
+    <string name="app_logo">Logo de Sentinel Core</string>
+    <string name="login_subtitle">Protege tu información</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="btn_login">Iniciar Sesión</string>
+    <string name="or_continue_with">O continuar con</string>
+    <string name="btn_google_signin">Continuar con Google</string>
+    <string name="btn_email_signin">Continuar con otro correo</string>
+    <string name="dont_have_account">¿No tienes cuenta?</string>
+    <string name="register_now">Regístrate</string>
+    <!-- Red Team -->
+    <string name="red_team_title">Red Team - Ataques</string>
+    <string name="deauth_attack">Deauthentication Attack</string>
+    <string name="captive_portal">Captive Portal</string>
+    <string name="packet_flood">Packet Flood</string>
+    <string name="default_web_client_id">484544486127-ds1068cnje9u40nbeffc1rotvhbd4ne1.apps.googleusercontent.com</string>
+
+</resources>

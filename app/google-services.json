@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "484544486127",
+    "project_id": "sentinel-core-e87a5",
+    "storage_bucket": "sentinel-core-e87a5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484544486127:android:16d23106aaedf642da191a",
+        "android_client_info": {
+          "package_name": "com.tecsup.sentinelcore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484544486127-ds1068cnje9u40nbefjc1rotvhbd4ne1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1dkBdszVCfzdt0kHA4_fsRBjkRzBoXZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484544486127-ds1068cnje9u40nbefjc1rotvhbd4ne1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

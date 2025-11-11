@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.SentinelCore" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Color de fondo -->
+        <item name="android:colorBackground">@color/white</item>
+
+        <!-- Barra de estado (opcional) -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.SentinelCore" parent="Base.Theme.SentinelCore" />
+</resources>
