@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
         app:title="Sentinel Core"
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,13 +29,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="80dp">
 
             <!-- Tarjeta de Bienvenida -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_primary">
@@ -43,14 +47,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bienvenido a Sentinel Core"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -61,12 +65,12 @@
                         android:text="usuario@ejemplo.com"
                         android:textColor="@color/white"
                         android:alpha="0.9"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="6dp"
                         android:text="Centro de Operaciones de Seguridad"
                         android:textColor="@color/white"
                         android:alpha="0.8"
@@ -79,7 +83,7 @@
                 android:id="@+id/cardRedTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="12dp"
@@ -89,12 +93,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:src="@android:drawable/stat_notify_error"
                         app:tint="@color/red_team"
                         android:contentDescription="Red Team Icon" />
@@ -104,23 +108,23 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="14dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Red Team"
                             android:textColor="@color/black"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="3dp"
                             android:text="Simula ataques de ciberseguridad"
                             android:textColor="@color/gray"
-                            android:textSize="14sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -128,12 +132,13 @@
                             android:layout_marginTop="4dp"
                             android:text="• Port Scanning • DDoS • Phishing"
                             android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="8dp"
                         android:src="@android:drawable/ic_menu_send"
                         app:tint="@color/gray"
                         android:contentDescription="Ir" />
@@ -145,7 +150,7 @@
                 android:id="@+id/cardBlueTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="12dp"
@@ -155,12 +160,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:src="@android:drawable/ic_menu_compass"
                         app:tint="@color/blue_team"
                         android:contentDescription="Blue Team Icon" />
@@ -170,23 +175,23 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="14dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Blue Team"
                             android:textColor="@color/black"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="3dp"
                             android:text="Defensa y contramedidas"
                             android:textColor="@color/gray"
-                            android:textSize="14sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -194,12 +199,13 @@
                             android:layout_marginTop="4dp"
                             android:text="• Firewall • IDS/IPS • Monitoring"
                             android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="8dp"
                         android:src="@android:drawable/ic_menu_send"
                         app:tint="@color/gray"
                         android:contentDescription="Ir" />
@@ -211,7 +217,7 @@
                 android:id="@+id/cardEventLog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="12dp"
@@ -221,12 +227,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:src="@android:drawable/ic_menu_recent_history"
                         app:tint="@color/event_log"
                         android:contentDescription="Event Log Icon" />
@@ -236,28 +242,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="14dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Registro de Eventos"
                             android:textColor="@color/black"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="3dp"
                             android:text="Historial de ataques y defensas"
                             android:textColor="@color/gray"
-                            android:textSize="14sp" />
+                            android:textSize="13sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="6dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -266,23 +272,24 @@
                                 android:layout_height="wrap_content"
                                 android:text="🛡️ 0 bloqueados"
                                 android:textColor="@color/blue_team"
-                                android:textSize="12sp"
+                                android:textSize="11sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tvTotalEvents"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
+                                android:layout_marginStart="10dp"
                                 android:text="📊 0 eventos"
                                 android:textColor="@color/gray"
-                                android:textSize="12sp" />
+                                android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="8dp"
                         android:src="@android:drawable/ic_menu_send"
                         app:tint="@color/gray"
                         android:contentDescription="Ir" />
@@ -294,7 +301,7 @@
                 android:id="@+id/cardSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="12dp"
@@ -304,12 +311,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:src="@android:drawable/ic_menu_manage"
                         app:tint="@color/gray"
                         android:contentDescription="Settings Icon" />
@@ -319,28 +326,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="14dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Configuración"
                             android:textColor="@color/black"
-                            android:textSize="18sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="3dp"
                             android:text="Perfil, seguridad y preferencias"
                             android:textColor="@color/gray"
-                            android:textSize="14sp" />
+                            android:textSize="13sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="8dp"
                         android:src="@android:drawable/ic_menu_send"
                         app:tint="@color/gray"
                         android:contentDescription="Ir" />

@@ -44,6 +44,11 @@ class EventAdapter(private var events: List<SecurityEvent>) :
                     context.getColor(R.color.blue_team))
                 holder.tvEventIcon.text = "🛡️"
             }
+            EventType.ATTACK_DETECTED -> {
+                holder.viewTypeIndicator.setBackgroundColor(
+                    context.getColor(R.color.warning))
+                holder.tvEventIcon.text = "🔍"
+            }
             EventType.DEFENSE_ACTIVATED -> {
                 holder.viewTypeIndicator.setBackgroundColor(
                     context.getColor(R.color.blue_team_dark))
@@ -60,6 +65,7 @@ class EventAdapter(private var events: List<SecurityEvent>) :
                 holder.tvEventIcon.text = "🚫"
             }
         }
+
 
         // Configurar estado
         when (event.status) {

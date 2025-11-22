@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primary">#FF6200EE</color>
-    <color name="gray">#FF757575</color>
-    <color name="gray_light">#FFE0E0E0</color>
+    <!-- Colores base -->
+    <color name="primary">#6200EE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="background">#F5F5F5</color>
+    <color name="card_primary">#6200EE</color>
 
-    <!-- Colores del Dashboard -->
-    <color name="background">#FFF5F5F5</color>
-    <color name="card_primary">#FF6200EE</color>
+    <!-- Red Team -->
+    <color name="red_team">#E53935</color>
+    <color name="red_team_dark">#C62828</color>
+    <color name="red_team_light">#FFCDD2</color>
+    <color name="red_team_accent">#D32F2F</color>
+    <color name="redteam">#E53935</color>
+    <color name="redteam_dark">#C62828</color>
+    <color name="redteam_light">#FFCDD2</color>
+    <color name="redteam_accent">#D32F2F</color>
 
-    <!-- Colores Red Team (más sutiles) -->
-    <color name="red_team">#FFE57373</color>
-    <color name="red_team_dark">#FFD32F2F</color>
-    <color name="red_team_light">#FFFFEBEE</color>
-    <color name="red_team_accent">#FFEF5350</color>
+    <!-- Blue Team -->
+    <color name="blue_team">#1E88E5</color>
+    <color name="blue_team_dark">#1565C0</color>
+    <color name="blue_team_light">#BBDEFB</color>
+    <color name="blueteam">#1E88E5</color>
+    <color name="blueteam_dark">#1565C0</color>
+    <color name="blueteam_light">#BBDEFB</color>
 
-    <!-- Colores Blue Team -->
-    <color name="blue_team">#FF64B5F6</color>
-    <color name="blue_team_dark">#FF1976D2</color>
-    <color name="blue_team_light">#FFE3F2FD</color>
+    <!-- Event Log -->
+    <color name="event_log">#FFA726</color>
+    <color name="event_log_dark">#F57C00</color>
+    <color name="eventlog">#FFA726</color>
+    <color name="eventlog_dark">#F57C00</color>
 
-    <!-- Otros colores -->
-    <color name="event_log">#FFFFB74D</color>
-    <color name="success">#FF66BB6A</color>
-    <color name="warning">#FFFFA726</color>
+    <!-- Estados -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF9800</color>
+    <color name="error">#F44336</color>
+    <color name="danger">#D32F2F</color>
+
+    <!-- Otros -->
+    <color name="gray_light">#E0E0E0</color>
 </resources>

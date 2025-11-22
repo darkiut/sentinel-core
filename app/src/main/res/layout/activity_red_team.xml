@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,8 +11,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red_team_dark"
+        android:background="@color/redteam_dark"
         android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
         app:title="Red Team - Ataques"
         app:titleTextColor="@color/white"
         app:navigationIcon="@android:drawable/ic_menu_revert"
@@ -29,13 +31,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="80dp">
 
             <!-- Estado de Conexión -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -43,83 +48,465 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Estado de la Red"
+                        android:text="Estado de Conexión"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
+
+                    <!-- Estado WiFi con indicador -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WiFi"
+                            android:textColor="@color/gray"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvWifiStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⚪ No conectado"
+                                android:textColor="@color/gray"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvWifiName"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:layout_marginStart="4dp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnOpenWifi"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_marginStart="6dp"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                app:backgroundTint="@color/blue_team_light"
+                                app:cornerRadius="18dp"
+                                app:icon="@drawable/ic_wifi"
+                                app:iconTint="@color/blue_team_dark"
+                                app:iconGravity="textStart"
+                                app:iconPadding="0dp"
+                                android:contentDescription="Abrir WiFi" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="6dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IP Local"
+                            android:textColor="@color/gray"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLocalIp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0.0.0"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ESP32"
+                            android:textColor="@color/gray"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvEsp32Status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚪ Desconectado"
+                            android:textColor="@color/redteam"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Ataque 1: Deauthentication -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDeauth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/redteam_accent"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@color/redteam_light"
+                            android:gravity="center"
+                            android:text="🚫"
+                            android:textColor="@color/redteam_dark"
+                            android:textSize="18sp" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginStart="10dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="WiFi:"
-                                android:textColor="@color/gray"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/tvWifiName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="No conectado"
+                                android:text="Deauthentication Attack"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="IP Local:"
+                                android:layout_marginTop="2dp"
+                                android:text="Envía paquetes de desautenticación para desconectar"
                                 android:textColor="@color/gray"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/tvLocalIp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0.0.0.0"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Conexión ESP32 -->
-                    <View
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilTargetMac"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="@color/gray_light" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="MAC del objetivo (FFFFFFFFFFFF = todos)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTargetMac"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="FFFFFFFFFFFF"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDeauth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:minHeight="48dp"
+                        android:text="Iniciar Ataque Deauth"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/redteam_accent" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Ataque 2: Captive Portal -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCaptivePortal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/redteam_accent"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@color/redteam_light"
+                            android:gravity="center"
+                            android:text="📡"
+                            android:textColor="@color/redteam_dark"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Captive Portal Evil Twin"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Crea un punto de acceso falso que captura credenciales"
+                                android:textColor="@color/gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilSsidName"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Nombre del WiFi falso (SSID)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSsidName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="WiFi_Gratis"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCaptivePortal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:minHeight="48dp"
+                        android:text="Activar Captive Portal"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/redteam_accent" />
+
+                    <TextView
+                        android:id="@+id/tvCapturedData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Datos capturados: 0"
+                        android:textColor="@color/gray"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Ataque 3: Packet Flood -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPacketFlood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/redteam_accent"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@color/redteam_light"
+                            android:gravity="center"
+                            android:text="💥"
+                            android:textColor="@color/redteam_dark"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Packet Flood Attack"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Envía miles de paquetes para saturar la red objetivo"
+                                android:textColor="@color/gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilTargetIp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="IP del objetivo">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTargetIp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="192.168.1.1"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPacketFlood"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:minHeight="48dp"
+                        android:text="Iniciar Flood"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/redteam_accent" />
+
+                    <TextView
+                        android:id="@+id/tvPacketsSent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Paquetes enviados: 0"
+                        android:textColor="@color/gray"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Monitor de Actividad -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monitor de Actividad"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvActivityLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="8dp"
+                        android:text="Esperando actividad..."
+                        android:textColor="@color/gray"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:background="@color/background"
+                        android:scrollbars="vertical"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Conexión ESP32 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Conexión ESP32"
                         android:textColor="@color/gray"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -140,352 +527,50 @@
                                 android:id="@+id/etEsp32Ip"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="numberDecimal"
-                                android:text="192.168.4.1" />
+                                android:inputType="text"
+                                android:text="192.168.1.100"
+                                android:textSize="13sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnConnectEsp32"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Conectar" />
+                            android:text="Conectar"
+                            android:textSize="13sp"
+                            app:backgroundTint="@color/blueteam" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvEsp32Status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="⚪ Desconectado"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Título de Ataques -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Selecciona un Ataque"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Ataque 1: Deauth Attack -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardDeauth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/red_team_accent"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@color/red_team_light"
-                            android:gravity="center"
-                            android:text="📡"
-                            android:textColor="@color/red_team_dark"
-                            android:textSize="20sp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Deauthentication Attack"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Envía paquetes de desautenticación para desconectar dispositivos de la red WiFi"
-                                android:textColor="@color/gray"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilTargetMac"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="MAC del objetivo (FF:FF:FF:FF:FF:FF = todos)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTargetMac"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="FF:FF:FF:FF:FF:FF" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnDeauth"
+                        android:id="@+id/btnScanDevices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Iniciar Ataque Deauth"
-                        app:backgroundTint="@color/red_team_accent" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:minHeight="48dp"
+                        android:text="Escanear Dispositivos"
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/eventlog"
+                        app:icon="@android:drawable/ic_menu_search" />
 
-            <!-- Ataque 2: Captive Portal -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardCaptivePortal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/red_team_accent"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@color/red_team_light"
-                            android:gravity="center"
-                            android:text="🌐"
-                            android:textColor="@color/red_team_dark"
-                            android:textSize="20sp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Captive Portal (Evil Twin)"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Crea un punto de acceso falso que captura credenciales (DNI y teléfono)"
-                                android:textColor="@color/gray"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilSsidName"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Nombre del WiFi falso (SSID)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSsidName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="WiFi_Gratis" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCaptivePortal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Activar Captive Portal"
-                        app:backgroundTint="@color/red_team_accent" />
-
-                    <TextView
-                        android:id="@+id/tvCapturedData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Datos capturados: 0"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Ataque 3: Packet Flood -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardPacketFlood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/red_team_accent"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@color/red_team_light"
-                            android:gravity="center"
-                            android:text="⚡"
-                            android:textColor="@color/red_team_dark"
-                            android:textSize="20sp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Packet Flood Attack"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Envía miles de paquetes para saturar la red objetivo"
-                                android:textColor="@color/gray"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilTargetIp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="IP del objetivo">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTargetIp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:text="192.168.1.1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPacketFlood"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Iniciar Flood"
-                        app:backgroundTint="@color/red_team_accent" />
-
-                    <TextView
-                        android:id="@+id/tvPacketsSent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Paquetes enviados: 0"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Monitor de Actividad -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Monitor de Actividad"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/background">
-
-                        <TextView
-                            android:id="@+id/tvActivityLog"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="Esperando actividad..."
-                            android:textColor="@color/gray"
-                            android:textSize="12sp"
-                            android:fontFamily="monospace" />
-                    </ScrollView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- BOTÓN FLOTANTE: ENVIAR A DISPOSITIVO REMOTO -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabSendRemote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send to Remote Device"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:icon="@android:drawable/ic_menu_send"
+        app:iconTint="@color/white"
+        app:backgroundTint="@color/redteam_accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

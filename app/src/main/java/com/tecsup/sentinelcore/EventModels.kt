@@ -11,12 +11,14 @@ data class SecurityEvent(
 )
 
 enum class EventType {
-    ATTACK_SENT,      // Ataque enviado (Red Team)
-    ATTACK_BLOCKED,   // Ataque bloqueado (Blue Team)
-    DEFENSE_ACTIVATED, // Defensa activada
-    INTRUSION_DETECTED, // Intrusión detectada
-    FIREWALL_BLOCK    // Bloqueo de firewall
+    ATTACK_SENT,           // Ataque enviado (Red Team)
+    ATTACK_BLOCKED,        // Ataque bloqueado (Blue Team)
+    ATTACK_DETECTED,       // NUEVO - Ataque detectado
+    DEFENSE_ACTIVATED,     // Defensa activada
+    INTRUSION_DETECTED,    // Intrusión detectada
+    FIREWALL_BLOCK         // Bloqueo de firewall
 }
+
 
 enum class EventStatus {
     SUCCESS,   // Exitoso

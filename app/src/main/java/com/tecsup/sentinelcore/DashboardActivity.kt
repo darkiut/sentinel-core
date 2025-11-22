@@ -6,6 +6,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var cardBlueTeam: MaterialCardView
     private lateinit var cardEventLog: MaterialCardView
     private lateinit var cardSettings: MaterialCardView
+    private lateinit var fabStats: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         setupClickListeners()
         loadEventStats()
         animateCardsOnLoad()
-
-        // NUEVO: Listener del botón flotante
-        findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabStats)
-            .setOnClickListener {
-                startActivity(Intent(this, StatsActivity::class.java))
-            }
     }
-
 
     private fun initViews() {
         tvUserEmail = findViewById(R.id.tvUserEmail)
@@ -47,6 +42,7 @@ class DashboardActivity : AppCompatActivity() {
         cardBlueTeam = findViewById(R.id.cardBlueTeam)
         cardEventLog = findViewById(R.id.cardEventLog)
         cardSettings = findViewById(R.id.cardSettings)
+        fabStats = findViewById(R.id.fabStats)
     }
 
     private fun setupUserInfo(email: String) {
@@ -75,18 +71,32 @@ class DashboardActivity : AppCompatActivity() {
             intent.putExtra("USER_EMAIL", tvUserEmail.text.toString())
             startActivity(intent)
         }
+
+        fabStats.setOnClickListener {
+            // Si tienes StatsActivity, descomentar la siguiente línea:
+            // startActivity(Intent(this, StatsActivity::class.java))
+
+            // Mientras tanto, mostrar un mensaje
+            Toast.makeText(this, "Estadísticas próximamente", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun loadEventStats() {
-        val events = EventLogActivity.getEvents()
+        try {
+            val events = EventLogActivity.getEvents()
 
-        val blockedCount = events.count {
-            it.type == EventType.ATTACK_BLOCKED || it.type == EventType.FIREWALL_BLOCK
+            val blockedCount = events.count {
+                it.type == EventType.ATTACK_BLOCKED || it.type == EventType.FIREWALL_BLOCK
+            }
+            val totalEvents = events.size
+
+            tvBlockedCount.text = "🛡️ $blockedCount bloqueados"
+            tvTotalEvents.text = "📊 $totalEvents eventos"
+        } catch (e: Exception) {
+            // Si hay error al cargar eventos, mostrar valores por defecto
+            tvBlockedCount.text = "🛡️ 0 bloqueados"
+            tvTotalEvents.text = "📊 0 eventos"
         }
-        val totalEvents = events.size
-
-        tvBlockedCount.text = "🛡️ $blockedCount bloqueados"
-        tvTotalEvents.text = "📊 $totalEvents eventos"
     }
 
     private fun animateCardClick(view: android.view.View) {
@@ -116,8 +126,8 @@ class DashboardActivity : AppCompatActivity() {
             card.animate()
                 .alpha(1f)
                 .translationY(0f)
-                .setDuration(500)
-                .setStartDelay((index * 100).toLong())
+                .setDuration(400)
+                .setStartDelay((index * 80).toLong())
                 .start()
         }
     }
