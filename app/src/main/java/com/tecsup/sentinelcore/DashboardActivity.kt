@@ -1,9 +1,13 @@
 package com.tecsup.sentinelcore
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,6 +24,8 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var cardSettings: MaterialCardView
     private lateinit var fabStats: FloatingActionButton
 
+    private val handler = Handler(Looper.getMainLooper())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -31,6 +37,9 @@ class DashboardActivity : AppCompatActivity() {
         setupClickListeners()
         loadEventStats()
         animateCardsOnLoad()
+        startFabPulseAnimation()
+        startStatsUpdater()
+        setupBackPressHandler()
     }
 
     private fun initViews() {
@@ -73,11 +82,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         fabStats.setOnClickListener {
-            // Si tienes StatsActivity, descomentar la siguiente línea:
-            // startActivity(Intent(this, StatsActivity::class.java))
-
-            // Mientras tanto, mostrar un mensaje
-            Toast.makeText(this, "Estadísticas próximamente", Toast.LENGTH_SHORT).show()
+            showStatsDialog()
         }
     }
 
@@ -93,14 +98,12 @@ class DashboardActivity : AppCompatActivity() {
             tvBlockedCount.text = "🛡️ $blockedCount bloqueados"
             tvTotalEvents.text = "📊 $totalEvents eventos"
         } catch (e: Exception) {
-            // Si hay error al cargar eventos, mostrar valores por defecto
             tvBlockedCount.text = "🛡️ 0 bloqueados"
             tvTotalEvents.text = "📊 0 eventos"
         }
     }
 
     private fun animateCardClick(view: android.view.View) {
-        // Efecto de escala al hacer clic
         view.animate()
             .scaleX(0.95f)
             .scaleY(0.95f)
@@ -116,7 +119,6 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun animateCardsOnLoad() {
-        // Animar cards al cargar
         val cards = listOf(cardRedTeam, cardBlueTeam, cardEventLog, cardSettings)
 
         cards.forEachIndexed { index, card ->
@@ -132,8 +134,83 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun startFabPulseAnimation() {
+        val scaleX = ObjectAnimator.ofFloat(fabStats, "scaleX", 1f, 1.1f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(fabStats, "scaleY", 1f, 1.1f, 1f)
+
+        scaleX.duration = 1500
+        scaleY.duration = 1500
+        scaleX.repeatCount = ObjectAnimator.INFINITE
+        scaleY.repeatCount = ObjectAnimator.INFINITE
+
+        scaleX.start()
+        scaleY.start()
+    }
+
+    private fun startStatsUpdater() {
+        val statsRunnable = object : Runnable {
+            override fun run() {
+                loadEventStats()
+                handler.postDelayed(this, 3000)
+            }
+        }
+        handler.post(statsRunnable)
+    }
+
+    private fun showStatsDialog() {
+        try {
+            val events = EventLogActivity.getEvents()
+
+            val attacksSent = events.count { it.type == EventType.ATTACK_SENT }
+            val attacksBlocked = events.count { it.type == EventType.ATTACK_BLOCKED }
+            val defensesActivated = events.count { it.type == EventType.DEFENSE_ACTIVATED }
+            val totalEvents = events.size
+
+            val message = """
+                📊 Estadísticas del Sistema
+                
+                🔴 Ataques enviados: $attacksSent
+                🛡️ Ataques bloqueados: $attacksBlocked
+                ✅ Defensas activadas: $defensesActivated
+                📋 Total de eventos: $totalEvents
+            """.trimIndent()
+
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Estadísticas Detalladas")
+                .setMessage(message)
+                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton("Ver Log") { _, _ ->
+                    startActivity(Intent(this, EventLogActivity::class.java))
+                }
+                .show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al cargar estadísticas", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupBackPressHandler() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                androidx.appcompat.app.AlertDialog.Builder(this@DashboardActivity)
+                    .setTitle("Salir de Sentinel Core")
+                    .setMessage("¿Deseas cerrar la aplicación?")
+                    .setPositiveButton("Salir") { _, _ ->
+                        finish()
+                        finishAffinity()
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+            }
+        })
+    }
+
     override fun onResume() {
         super.onResume()
-        loadEventStats() // Actualizar estadísticas cuando volvamos
+        loadEventStats()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
     }
 }

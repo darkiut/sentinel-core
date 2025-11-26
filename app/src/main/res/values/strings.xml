@@ -16,5 +16,7 @@
     <string name="captive_portal">Captive Portal</string>
     <string name="packet_flood">Packet Flood</string>
     <string name="default_web_client_id">484544486127-ds1068cnje9u40nbeffc1rotvhbd4ne1.apps.googleusercontent.com</string>
+    <string name="widget_description">Estado de Sentinel Core</string>
+
 
 </resources>
